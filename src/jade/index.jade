@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title Adjust Height jQuery Plugin
+    meta(name="description", content="jQuery plugin")
+    link(rel="stylesheet", href='css/style.css')
+
+  body
+    header.pageHeader#pageHeader
+      h1 jQuery.Bangs.js
+      p 要素の高さを揃えるライブラリ
+      p
+        a.btn01(href="https://github.com/muyuu/jquery.bangs.js",target="_blank")
+          i.fa.fa-github
+          | download jQuery.bangs.js
+
+
+    section.pageContent
+      ul.lists.row
+        li.list.col3
+          img(src='/img/li01.jpg')
+        li.list.col3
+          img(src='/img/li02.jpg')
+        li.list.col3
+          img(src='/img/li03.jpg')
+        li.list.col3
+          img(src='/img/li04.jpg')
+
+
+    footer.pageFooter#pageFooter
+      .container
+        .copyright
+          p Copyright(c)2014 muyuu, Inc. All rights reserved.
+
+
+    script(src="/libs/jquery/jquery.min.js")
+    script(src="/jquery.bangs.js")
+    script.
+      $(function(){
+        $('.list').bangs();
+      });
+
+
+

@@ -1,0 +1,23 @@
+{
+  "name": "jquery.bangs.js",
+  "version": "0.0.1",
+  "main": "jquery.bangs.js",
+  "repository": "",
+  "ignore": [
+  ],
+  "devDependencies": {
+    "jquery": "1.11.0"
+  },
+  "devDependencies": {
+    "jquery": "1.11.0",
+    "jasmine-jquery": "1"
+  },
+  "exportsOverride": {
+    "jquery": {
+      "": "**/jquery.min.js"
+    },
+    "jasmine-jquery": {
+      "": "lib/jasmine-jquery.js"
+    }
+  }
+}
