@@ -1,57 +1,44 @@
 gulp = require "gulp"
-jade = require "gulp-jade"
-sass = require "gulp-ruby-sass"
-coffee = require "gulp-coffee"
-connect = require "gulp-connect"
-open = require "gulp-open"
-concat = require "gulp-concat"
-changed = require 'gulp-changed'
-plumber = require 'gulp-plumber'
-karma = require 'gulp-karma'
+$ = require('gulp-load-plugins')()
 
+src = "src/"
+dist = "dist/"
+asset = "assets/"
+spec = "spec/"
+txt = "txt/"
 
-
-src =
-  dir: "./src/"
-  jade: "./src/jade/"
-  sass: "./src/sass/"
-  coffee: "./src/coffee/"
-
-dist =
-  dir: "./"
-  asset: ""
-  css: "./css/"
-  js: "./"
-  lib: "./libs/"
-  img: "./img/"
-
-txt =
-  dir: "./txt/"
-
-spec =
-  dir: "./spec/"
-  coffee: "./spec/coffee/"
-  fixture: "./spec/fixtures/"
+d =
+  jade: src + "jade/"
+  sass: src + "sass/"
+  coffee: src + "coffee/"
+  html: dist
+  css: dist + asset + "./css/"
+  js: dist + asset + "./js/"
+  lib: dist + asset + "./libs/"
+  img: dist + asset + "./img/"
+  spec:
+    coffee: spec + "coffee/"
+    fixture: spec + "fixtures/"
 
 
 jsFiles = [
-  "#{dist.js}jquery.bangs.js"
+  "#{d.js}jquery.bangs.js"
 ]
 
 
 karmaFiles = [
-  "#{dist.lib}jquery/jquery.min.js"
-  "#{dist.lib}jasmine-jquery/jasmine-jquery.js"
-  "#{dist.js}jquery.bangs.js"
-  "#{spec.dir}**/*Spec.js"
-  "#{spec.fixture}**/*.html"
+  "#{d.lib}jquery/jquery.min.js"
+  "#{d.lib}jasmine-jquery/jasmine-jquery.js"
+  "#{d.js}jquery.bangs.js"
+  "#{spec}**/*Spec.js"
+  "#{d.spec.fixture}**/*.html"
 ]
 
 
 # local server
 gulp.task "connect", ->
-  connect.server
-    root: "#{dist.dir}"
+  $.connect.server
+    root: "#{d.html}"
     port: 3000
     livereload: true
 
@@ -63,52 +50,52 @@ gulp.task "url", ->
     url: "http://localhost:3000"
     app: "Google Chrome"
 
-  gulp.src "#{dist.dir}index.html"
-    .pipe open "", options
+  gulp.src "#{d.html}index.html"
+    .pipe $.open "", options
 
 
 
 # jade
 gulp.task "jade", ->
-  gulp.src ["#{src.jade}**/*.jade", "!#{src.jade}**/_*.jade"]
-    .pipe changed "#{dist.dir}", { hasChanged: changed.compareSha1Digest }
-    .pipe plumber()
-    .pipe jade
+  gulp.src ["#{d.jade}**/*.jade", "!#{d.jade}**/_*.jade"]
+    .pipe $.changed "#{d.html}", { hasChanged: $.changed.compareSha1Digest }
+    .pipe $.plumber()
+    .pipe $.jade
       pretty: true
-      basedir: "#{src.jade}"
-    .pipe gulp.dest "#{dist.dir}"
-    .pipe connect.reload()
+      basedir: "#{d.jade}"
+    .pipe gulp.dest "#{d.html}"
+    .pipe $.connect.reload()
 
 
 
 # sass
 gulp.task "sass", ->
-  gulp.src "#{src.sass}style.sass"
-    .pipe plumber()
-    .pipe sass
+  gulp.src "#{d.sass}style.sass"
+    .pipe $.plumber()
+    .pipe $['rubySass']
       sourcemap: true
-    .pipe gulp.dest("#{dist.css}")
-    .pipe connect.reload()
+    .pipe gulp.dest("#{d.css}")
+    .pipe $.connect.reload()
 
 
 
 # coffee
 gulp.task "coffee", ->
-  gulp.src "#{src.coffee}**/*.coffee"
-    .pipe plumber()
-    .pipe coffee
+  gulp.src "#{d.coffee}**/*.coffee"
+    .pipe $.plumber()
+    .pipe $.coffee
       bare: true
-    .pipe gulp.dest("#{dist.js}")
-    .pipe connect.reload()
+    .pipe gulp.dest("#{d.js}")
+    .pipe $.connect.reload()
 
 
 # specCoffee
 gulp.task "specCoffee", ->
-  gulp.src "#{spec.coffee}**/*.coffee"
-    .pipe plumber()
-    .pipe coffee
+  gulp.src "#{d.spec.coffee}**/*.coffee"
+    .pipe $.plumber()
+    .pipe $.coffee
       bare: true
-    .pipe gulp.dest("#{spec.dir}")
+    .pipe gulp.dest("#{spec}")
 
 
 
@@ -116,7 +103,7 @@ gulp.task "specCoffee", ->
 # karma
 gulp.task 'karma', ->
   gulp.src files
-    .pipe karma
+    .pipe $.karma
       configFile: 'karma.conf.js'
       action: 'run'
 
@@ -124,12 +111,12 @@ gulp.task 'karma', ->
 
 # watch
 gulp.task "watch", ->
-  gulp.watch "#{src.jade}**/*.jade", ["jade"]
-  gulp.watch "#{src.sass}**/*.sass", ["sass"]
-  gulp.watch "#{src.coffee}**/*.coffee", ["coffee"]
-  gulp.watch "#{spec.coffee}**/*.coffee", ["specCoffee"]
+  gulp.watch "#{d.jade}**/*.jade", ["jade"]
+  gulp.watch "#{d.sass}**/*.sass", ["sass"]
+  gulp.watch "#{d.coffee}**/*.coffee", ["coffee"]
+  gulp.watch "#{d.spec.coffee}**/*.coffee", ["specCoffee"]
   gulp.src karmaFiles
-    .pipe karma
+    .pipe $.karma
       configFile: 'karma.conf.js'
       action: 'watch'
 
