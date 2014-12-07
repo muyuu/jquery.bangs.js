@@ -4,10 +4,10 @@ describe "Bangs", ->
   jasmine.getFixtures().fixturesPath = 'base/spec/fixtures/'
   loadFixtures 'bangs.html'
 
-  lists = $ '.list'
-  first = lists.first()
+  lists = $ '.lists'
+  first = lists.find('.list').first()
 
-  lists.bangs()
+  lists.bangs({item:'.list'})
 
 
   it "高さは130", ->

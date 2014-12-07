@@ -2,36 +2,40 @@
 # Adjust Height jQuery plugin Bangs
 # ----------------------------------
 (($) ->
-  $.fn.bangs = ->
-    self = this
-    lists = $(self)
+  $.fn.bangs = (options)->
+    elements = $(@)
     maxH = 0
 
-    # height reset
-    self.init = ()->
-      maxH = 0
-      lists.css
-        "height": ""
+    # option
+    defaults =
+      item: ".bangs__item"
 
+    opts = $.extend({}, defaults, options)
 
-    self.adjust = ()->
-      lists.each ->
-        h = $(this).height()
-        maxH = h  if maxH < h
+    # セレクタで指定した要素の個数分数値を変える必要があるから
+    # その要素分繰り返す
+    elements.each (index)->
+      element = $(@)
+      items = element.find(opts.item)
 
-      lists.height maxH
+      # height reset
+      init = ()->
+        maxH = 0
+        items.css
+          "height": ""
 
+      # adjust height
+      adjust = ()->
+        items.each ->
+          h = $(@).height()
+          maxH = h  if maxH < h
 
-    # onload event
-    $(window).load ->
-      self.init()
-      self.adjust()
+        items.height maxH
 
-
-    # resize event
-    timer = false
-    $(window).resize ->
-      self.init()
-      self.adjust()
-
+      # onload event
+      $(window).on "load resize", ->
+        init()
+        adjust()
+      return
+    return
 ) jQuery

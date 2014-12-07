@@ -1,10 +1,12 @@
+include /_conf
+
 doctype html
 html
   head
     meta(charset='UTF-8')
     title Adjust Height jQuery Plugin
     meta(name="description", content="jQuery plugin")
-    link(rel="stylesheet", href='css/style.css')
+    link(rel="stylesheet", href='#{css}style.css')
 
   body
     header.pageHeader#pageHeader
@@ -17,15 +19,25 @@ html
 
 
     section.pageContent
-      ul.lists.row
-        li.list.col3
-          img(src='/img/li01.jpg')
-        li.list.col3
-          img(src='/img/li02.jpg')
-        li.list.col3
-          img(src='/img/li03.jpg')
-        li.list.col3
-          img(src='/img/li04.jpg')
+      ul.bangs.lists.row
+        li.bangs__item.list.col3
+          img(src='#{img}li01.jpg')
+        li.bangs__item.list.col3
+          img(src='#{img}li02.jpg')
+        li.bangs__item.list.col3
+          img(src='#{img}li03.jpg')
+        li.bangs__item.list.col3
+          img(src='#{img}li04.jpg')
+
+      ul.bangs.lists.row
+        li.bangs__item.list.col3
+          img(src='#{img}li01.jpg', height="20")
+        li.bangs__item.list.col3
+          img(src='#{img}li02.jpg', height="20")
+        li.bangs__item.list.col3
+          img(src='#{img}li03.jpg', height="20")
+        li.bangs__item.list.col3
+          img(src='#{img}li04.jpg', height="40")
 
 
     footer.pageFooter#pageFooter
@@ -34,11 +46,11 @@ html
           p Copyright(c)2014 muyuu, Inc. All rights reserved.
 
 
-    script(src="/libs/jquery/jquery.min.js")
-    script(src="/jquery.bangs.js")
+    script(src="#{lib}js/jquery.min.js")
+    script(src="#{js}jquery.bangs.js")
     script.
       $(function(){
-        $('.list').bangs();
+        $('.bangs').bangs();
       });
 
 
