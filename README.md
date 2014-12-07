@@ -5,17 +5,20 @@ jQuery plugin for Adjust height elemets
 
 ## usage
 Read jQuery
-````<script src="jquery.js"></script>
+````
+<script src="jquery.js"></script>
 ````
 
 Read this plugin
-````<script src="jquery.bangs.js"></script>
+````
+<script src="jquery.bangs.js"></script>
 ````
 
 Bind
-````<script>
+````
+<script>
 $(function(){
-  $('listItem').bangs();
+  $('listItems').bangs({item: ".item"});
 });
 </script>
 ````
