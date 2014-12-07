@@ -1,5 +1,8 @@
 gulp = require "gulp"
 $ = require('gulp-load-plugins')()
+gulpFilter = require 'gulp-filter'
+mainBowerFiles = require 'main-bower-files'
+del = require 'del'
 
 src = "src/"
 dist = "dist/"
@@ -27,12 +30,32 @@ jsFiles = [
 
 
 karmaFiles = [
-  "#{d.lib}jquery/jquery.min.js"
-  "#{d.lib}jasmine-jquery/jasmine-jquery.js"
+  "#{d.lib}js/jquery.min.js"
+  "#{d.lib}js/jasmine-jquery.js"
   "#{d.js}jquery.bangs.js"
   "#{spec}**/*Spec.js"
   "#{d.spec.fixture}**/*.html"
 ]
+
+
+# bower
+gulp.task 'clear-libs', ->
+  del.sync "#{d.lib}"
+
+gulp.task "bower", ['clear-libs'], ->
+  jsFilter = gulpFilter ["**/*.js", "**/*.map"]
+  cssFilter = gulpFilter "**/*.css"
+  fontsFilter = gulpFilter ["**/*.otf", "**/*.eot","**/*.svg","**/*.ttf","**/*.woff"]
+
+  gulp.src(mainBowerFiles())
+    .pipe(jsFilter)
+    .pipe(gulp.dest("#{d.lib}js"))
+    .pipe(jsFilter.restore())
+    .pipe(cssFilter)
+    .pipe(gulp.dest("#{d.lib}css"))
+    .pipe(cssFilter.restore())
+    .pipe(fontsFilter)
+    .pipe(gulp.dest("#{d.lib}fonts"))
 
 
 # local server
@@ -122,6 +145,11 @@ gulp.task "watch", ->
       action: 'watch'
 
 
+
+
+# 最初に使うタスク
+gulp.task "lib", ->
+  gulp.start "bower"
 
 
 gulp.task "default", ->
