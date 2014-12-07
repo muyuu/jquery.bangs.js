@@ -1,9 +1,9 @@
 {
-  "name": "ieulLP36",
+  "name": "jquery.bangs.js",
   "version": "0.0.2",
-  "description": "ieul LP",
-  "main": "",
-  "repository": "",
+  "description": "jQuery plugin adjust height",
+  "main": "jquery.bangs.js",
+  "repository": "https://github.com/muyuu/jquery.bangs.js",
   "author": "muyuu",
   "license": "GPL",
   "devDependencies": {
