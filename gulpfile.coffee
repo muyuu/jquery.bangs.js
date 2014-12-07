@@ -86,6 +86,7 @@ gulp.task "coffee", ->
     .pipe $.coffee
       bare: true
     .pipe gulp.dest("#{d.js}")
+    .pipe gulp.dest("./")
     .pipe $.connect.reload()
 
 

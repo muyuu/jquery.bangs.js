@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Adjust Height jQuery Plugin</title>
+    <meta name="description" content="jQuery plugin">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <header id="pageHeader" class="pageHeader">
+      <h1>jQuery.Bangs.js</h1>
+      <p>要素の高さを揃えるライブラリ</p>
+      <p><a href="https://github.com/muyuu/jquery.bangs.js" target="_blank" class="btn01"><i class="fa fa-github"></i>download jQuery.bangs.js</a></p>
+    </header>
+    <section class="pageContent">
+      <ul class="bangs lists row">
+        <li class="bangs__item list col3"><img src="/assets/img/li01.jpg"></li>
+        <li class="bangs__item list col3"><img src="/assets/img/li02.jpg"></li>
+        <li class="bangs__item list col3"><img src="/assets/img/li03.jpg"></li>
+        <li class="bangs__item list col3"><img src="/assets/img/li04.jpg"></li>
+      </ul>
+      <ul class="bangs lists row">
+        <li class="bangs__item list col3"><img src="/assets/img/li01.jpg" height="20"></li>
+        <li class="bangs__item list col3"><img src="/assets/img/li02.jpg" height="20"></li>
+        <li class="bangs__item list col3"><img src="/assets/img/li03.jpg" height="20"></li>
+        <li class="bangs__item list col3"><img src="/assets/img/li04.jpg" height="40"></li>
+      </ul>
+    </section>
+    <footer id="pageFooter" class="pageFooter">
+      <div class="container">
+        <div class="copyright">
+          <p>Copyright(c)2014 muyuu, Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="/assets/libs/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.bangs.js"></script>
+    <script>
+      $(function(){
+        $('.bangs').bangs();
+      });
+      
+      
+      
+    </script>
+  </body>
+</html>
