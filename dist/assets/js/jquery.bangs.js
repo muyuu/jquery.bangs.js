@@ -1,4 +1,4 @@
-(function($) {
+(function(w, $) {
   return $.fn.bangs = function(options) {
     var defaults, elements, maxH, opts;
     elements = $(this);
@@ -33,4 +33,4 @@
       });
     });
   };
-})(jQuery);
+})(window, jQuery);

@@ -1,7 +1,7 @@
 # ----------------------------------
 # Adjust Height jQuery plugin Bangs
 # ----------------------------------
-(($) ->
+((w, $) ->
   $.fn.bangs = (options)->
     elements = $(@)
     maxH = 0
@@ -38,4 +38,4 @@
         adjust()
       return
     return
-) jQuery
+) window, jQuery
